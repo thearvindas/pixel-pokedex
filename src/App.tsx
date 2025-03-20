@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import PokemonList from './pages/PokemonList';
@@ -7,13 +7,13 @@ import { Pokemon } from './services/pokeApi';
 import { MobileWarning } from './components/MobileWarning';
 
 const AppContainer = styled.div`
-  min-height: 100vh;
-  background-color: #87CEEB;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   padding: 20px;
+  background-color: #87CEEB;
   gap: 20px;
 `;
 
@@ -161,21 +161,6 @@ const RoundButton = styled.div<{ size?: string; color?: string }>`
   border-radius: 50%;
   border: 2px solid #aa1f2f;
   align-self: center;
-`;
-
-const SpeakerHoles = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  margin-top: 20px;
-  width: 40px;
-`;
-
-const SpeakerHole = styled.div`
-  width: 8px;
-  height: 8px;
-  background-color: #222;
-  border-radius: 50%;
 `;
 
 const Divider = styled.div`
