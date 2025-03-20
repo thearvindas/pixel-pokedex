@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import PokemonList from './pages/PokemonList';
 import PokemonDetail from './pages/PokemonDetail';
 import { Pokemon } from './services/pokeApi';
+import { MobileWarning } from './components/MobileWarning';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -222,6 +223,24 @@ const Credits = styled.div`
 
 function App() {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  if (isMobile) {
+    return <MobileWarning />;
+  }
 
   return (
     <Router>
@@ -246,7 +265,7 @@ function App() {
               <ControlsRight>
                 <ButtonsGroup>
                   <ActionButton />
-                  <ActionButton />
+                  <ActionButton onClick={() => window.open('https://www.youtube.com/watch?v=xvFZjo5PgG0', '_blank')} style={{ cursor: 'pointer' }} />
                 </ButtonsGroup>
               </ControlsRight>
             </Controls>
